@@ -1,5 +1,5 @@
 import sys
-
+"""Return True if a sequence is long enough and does not contain numbers."""
 def validate_sequence(sequence, k):
     if len(sequence) < k:
         return False
@@ -8,6 +8,7 @@ def validate_sequence(sequence, k):
             return False
     return True
 
+"""Update the count for one k-mer and the character that follows."""
 def update_kmer_count(kmer_data, kmer, next_char):
     if kmer not in kmer_data:
         kmer_data[kmer] = {'count': 1, 'next_chars': {}}
@@ -19,7 +20,7 @@ def update_kmer_count(kmer_data, kmer, next_char):
     kmer_data[kmer]['next_chars'][next_char] += 1
 
     return kmer_data
-
+"""Count kmers in one sequences along with each following character"""
 def count_kmers_with_context(sequence, k):
     kmer_data = {}
     
@@ -31,7 +32,7 @@ def count_kmers_with_context(sequence, k):
     
     return kmer_data
 
-
+"""Write kmer following character summary to an output file"""
 def write_results_to_file(kmer_data, output_filename):
     sorted_kmers = sorted(kmer_data.keys())
     
@@ -46,7 +47,7 @@ def write_results_to_file(kmer_data, output_filename):
             
             f.write(f"{kmer} {next_char_str}\n")
 
-
+"""Read cmd line args, analyze sequences, and write results to a file"""
 def main():
     sequence_file = sys.argv[1]
     k = int(sys.argv[2])
